@@ -10,7 +10,7 @@
 [submodule "third-party/build-deps"]
 	path = third-party/build-deps
 	url = https://github.com/LizardByte/build-deps.git
-	branch = dist
+	branch = d0a09a69ce686869ddbc97067854dbd7ef993b90
 [submodule "third-party/doxygen-awesome-css"]
 	path = third-party/doxygen-awesome-css
 	url = https://github.com/jothepro/doxygen-awesome-css.git
