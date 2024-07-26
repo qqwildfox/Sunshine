@@ -45,7 +45,31 @@
           with:
             github_token: ${{ secrets.GITHUB_TOKEN }}
   
-    
+    setup_flatpak_matrix:
+      name: Setup Flatpak Matrix
+      runs-on: ubuntu-latest
+      steps:
+        - name: Set release details
+          id: flatpak_matrix
+          # https://www.cynkra.com/blog/2020-12-23-dynamic-gha
+          run: |
+            # determine which architectures to build
+            if [[ "${{ github.event_name }}" == "push" ]]; then
+              matrix=$((
+                echo '{ "arch" : ["x86_64", "aarch64"] }'
+              ) | jq -c .)
+            else
+              matrix=$((
+                echo '{ "arch" : ["x86_64"] }'
+              ) | jq -c .)
+            fi
+  
+            echo $matrix
+            echo $matrix | jq .
+            echo "matrix=$matrix" >> $GITHUB_OUTPUT
+  
+      outputs:
+        matrix: ${{ steps.flatpak_matrix.outputs.matrix }}
   
    
   
